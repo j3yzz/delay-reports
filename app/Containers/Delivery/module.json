@@ -1,0 +1,11 @@
+{
+    "name": "Delivery",
+    "alias": "delivery",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Containers\\Delivery\\Providers\\DeliveryServiceProvider"
+    ],
+    "files": []
+}

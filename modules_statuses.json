@@ -2,5 +2,6 @@
     "User": true,
     "Vendor": true,
     "Driver": true,
-    "Agent": true
+    "Agent": true,
+    "Delivery": true
 }
