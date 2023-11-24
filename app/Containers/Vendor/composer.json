@@ -18,14 +18,13 @@
     "autoload": {
         "psr-4": {
             "App\\Containers\\Vendor\\": "",
-            "App\\Containers\\Vendor\\App\\": "app/",
-            "App\\Containers\\Vendor\\Database\\Factories\\": "database/factories/",
-            "App\\Containers\\Vendor\\Database\\Seeders\\": "database/seeders/"
+            "App\\Containers\\Vendor\\Database\\Factories\\": "Infrastructure/database/factories/",
+            "App\\Containers\\Vendor\\Database\\Seeders\\": "Infrastructure/database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Containers\\Vendor\\Tests\\": "tests/"
+            "App\\Containers\\Vendor\\Tests\\": "Tests/"
         }
     }
 }
