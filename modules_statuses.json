@@ -1,5 +1,6 @@
 {
     "User": true,
     "Vendor": true,
-    "Driver": true
+    "Driver": true,
+    "Agent": true
 }
