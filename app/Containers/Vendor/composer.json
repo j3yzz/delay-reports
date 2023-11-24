@@ -1,0 +1,31 @@
+{
+    "name": "nwidart/vendor",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Containers\\Vendor\\": "",
+            "App\\Containers\\Vendor\\App\\": "app/",
+            "App\\Containers\\Vendor\\Database\\Factories\\": "database/factories/",
+            "App\\Containers\\Vendor\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Containers\\Vendor\\Tests\\": "tests/"
+        }
+    }
+}
