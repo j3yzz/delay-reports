@@ -1,0 +1,11 @@
+{
+    "name": "Agent",
+    "alias": "agent",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Containers\\Agent\\Providers\\AgentServiceProvider"
+    ],
+    "files": []
+}
