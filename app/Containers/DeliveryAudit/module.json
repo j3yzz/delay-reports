@@ -1,0 +1,11 @@
+{
+    "name": "DeliveryAudit",
+    "alias": "deliveryaudit",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Containers\\DeliveryAudit\\Providers\\DeliveryAuditServiceProvider"
+    ],
+    "files": []
+}

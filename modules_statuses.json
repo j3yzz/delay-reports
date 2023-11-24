@@ -3,5 +3,6 @@
     "Vendor": true,
     "Driver": true,
     "Agent": true,
-    "Delivery": true
+    "Delivery": true,
+    "DeliveryAudit": true
 }
