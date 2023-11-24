@@ -1,5 +1,6 @@
 <?php
 
+use App\Containers\User\Http\Controllers\Api\V1\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,12 @@ use Illuminate\Support\Facades\Route;
     |
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
-    Route::get('user', fn (Request $request) => $request->user())->name('user');
+Route::group([
+//    'middleware'    => ['auth', 'bannedUser', 'preventBackHistory'],
+    'prefix'        => 'v1',
+    'namespace'     => 'V1',
+    'as'            => 'api.v1.'
+], function() {
+    Route::post('auth/login', [LoginController::class, 'login'])
+        ->name('auth.login');
 });
