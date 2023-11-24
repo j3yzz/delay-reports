@@ -1,0 +1,11 @@
+{
+    "name": "Driver",
+    "alias": "driver",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "App\\Containers\\Driver\\Providers\\DriverServiceProvider"
+    ],
+    "files": []
+}

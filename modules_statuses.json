@@ -1,4 +1,5 @@
 {
     "User": true,
-    "Vendor": true
+    "Vendor": true,
+    "Driver": true
 }
