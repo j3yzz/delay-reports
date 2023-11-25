@@ -22,4 +22,14 @@ class DelayReportRepository implements DelayReportRepositoryInterface
             ->first();
 
     }
+
+    public function firstUnfinishedQueueDelayReport(int $orderId): ?DelayReport
+    {
+        return DelayReport::query()
+            ->where([
+                'approach_type' => DelayReport::APPROACH_ADD_TO_QUEUE,
+                'order_id' => $orderId,
+                ['status', '!=', DelayReport::STATUS_FINISHED],
+            ])->first();
+    }
 }
