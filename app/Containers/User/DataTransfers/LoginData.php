@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Containers\User\DataTransfer;
+namespace App\Containers\User\DataTransfers;
 
 use App\Ship\DataTransfers\DataTransfer;
 

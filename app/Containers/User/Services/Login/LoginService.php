@@ -3,7 +3,7 @@
 namespace App\Containers\User\Services\Login;
 
 use App\Containers\User\Contracts\Services\LoginServiceInterface;
-use App\Containers\User\DataTransfer\LoginData;
+use App\Containers\User\DataTransfers\LoginData;
 use App\Containers\User\Services\Login\Tasks\CheckUserValidityTask;
 use App\Containers\User\Services\Login\Tasks\CreateUserAccessTokenTask;
 

@@ -2,7 +2,7 @@
 
 namespace App\Containers\User\Http\Requests\Api\V1;
 
-use App\Containers\User\DataTransfer\LoginData;
+use App\Containers\User\DataTransfers\LoginData;
 use App\Ship\DataTransfers\DataTransfer;
 use App\Ship\Http\FormRequest\FormRequest;
 

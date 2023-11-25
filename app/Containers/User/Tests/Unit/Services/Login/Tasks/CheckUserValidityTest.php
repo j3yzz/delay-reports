@@ -3,7 +3,7 @@
 namespace App\Containers\User\Tests\Unit\Services\Login\Tasks;
 
 use App\Containers\User\Contracts\Repositories\UserRepositoryInterface;
-use App\Containers\User\DataTransfer\LoginData;
+use App\Containers\User\DataTransfers\LoginData;
 use App\Containers\User\Exceptions\InvalidPasswordException;
 use App\Containers\User\Exceptions\PhoneNotVerifiedException;
 use App\Containers\User\Models\User;

@@ -2,7 +2,7 @@
 
 namespace App\Containers\User\Contracts\Services;
 
-use App\Containers\User\DataTransfer\LoginData;
+use App\Containers\User\DataTransfers\LoginData;
 
 interface LoginServiceInterface
 {
