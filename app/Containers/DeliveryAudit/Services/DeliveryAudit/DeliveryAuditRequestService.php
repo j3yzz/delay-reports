@@ -5,6 +5,7 @@ namespace App\Containers\DeliveryAudit\Services\DeliveryAudit;
 use App\Containers\Delivery\Models\Order;
 use App\Containers\DeliveryAudit\Adapter\DeliveryAdapter\DeliveryAdapter;
 use App\Containers\DeliveryAudit\Contracts\Service\DeliveryAuditRequestServiceInterface;
+use App\Containers\DeliveryAudit\DataTransfers\AuditData;
 use App\Containers\DeliveryAudit\Entities\Order as OrderEntity;
 use App\Containers\DeliveryAudit\Services\DeliveryAudit\AuditStrategy\Approaches\DeliveryEstimateApproach;
 use App\Containers\DeliveryAudit\Services\DeliveryAudit\AuditStrategy\Approaches\DeliveryTrackApproach;
@@ -24,9 +25,9 @@ class DeliveryAuditRequestService implements DeliveryAuditRequestServiceInterfac
     ) {
     }
 
-    public function audit(int $orderId)
+    public function audit(AuditData $auditData)
     {
-        $order = $this->deliveryAdapter->findOrderById($orderId);
+        $order = $this->deliveryAdapter->findOrderById($auditData->orderId);
         if (!$order) {
             throw (new ModelNotFoundException())->setModel(Order::class);
         }

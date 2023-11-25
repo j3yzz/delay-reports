@@ -2,7 +2,9 @@
 
 namespace App\Containers\DeliveryAudit\Contracts\Service;
 
+use App\Containers\DeliveryAudit\DataTransfers\AuditData;
+
 interface DeliveryAuditRequestServiceInterface
 {
-    public function audit(int $orderId);
+    public function audit(AuditData $auditData);
 }
