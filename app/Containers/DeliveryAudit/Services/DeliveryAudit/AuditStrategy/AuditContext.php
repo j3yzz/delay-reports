@@ -21,4 +21,12 @@ class AuditContext
     {
         $this->auditApproach = $auditApproach;
     }
+
+    /**
+     * @return AuditApproachInterface
+     */
+    public function getAuditApproach(): AuditApproachInterface
+    {
+        return $this->auditApproach;
+    }
 }

@@ -7,6 +7,7 @@ use App\Containers\DeliveryAudit\Adapter\DeliveryAdapter\DeliveryAdapter;
 use App\Containers\DeliveryAudit\Contracts\Service\DeliveryAuditRequestServiceInterface;
 use App\Containers\DeliveryAudit\DataTransfers\AuditData;
 use App\Containers\DeliveryAudit\Entities\Order as OrderEntity;
+use App\Containers\DeliveryAudit\Models\DelayReport;
 use App\Containers\DeliveryAudit\Services\DeliveryAudit\AuditStrategy\Approaches\DeliveryEstimateApproach;
 use App\Containers\DeliveryAudit\Services\DeliveryAudit\AuditStrategy\Approaches\DeliveryTrackApproach;
 use App\Containers\DeliveryAudit\Services\DeliveryAudit\AuditStrategy\AuditContext;
@@ -49,8 +50,18 @@ class DeliveryAuditRequestService implements DeliveryAuditRequestServiceInterfac
             $this->auditContext->setAuditApproach(new DeliveryTrackApproach());
         }
 
-
         $auditContextExecute = $this->auditContext->execute($orderEntity);
-        dd($auditContextExecute);
+        return $auditContextExecute;
+    }
+
+    public function getAuditApproach(): string
+    {
+        if ($this->auditContext->getAuditApproach() instanceof DeliveryTrackApproach) {
+            $approach = DelayReport::APPROACH_ADD_TO_QUEUE;
+        } else {
+            $approach = DelayReport::APPROACH_RETURN_NEW_ESTIMATION;
+        }
+
+        return $approach;
     }
 }
