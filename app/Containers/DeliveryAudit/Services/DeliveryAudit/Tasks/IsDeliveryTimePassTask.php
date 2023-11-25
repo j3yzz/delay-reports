@@ -18,7 +18,7 @@ class IsDeliveryTimePassTask
         $orderedAt = Carbon::parse($orderedAt);
         $deliveryDatetime = $orderedAt->addMinutes($deliveryTime);
 
-        if (!$deliveryDatetime->isPast()) {
+        if ($deliveryDatetime->isFuture()) {
             throw new DeliveryTimeNotPastException();
         }
     }
