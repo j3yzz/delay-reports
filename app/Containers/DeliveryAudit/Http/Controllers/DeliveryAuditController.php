@@ -8,7 +8,10 @@ use App\Containers\Delivery\Models\Order;
 use App\Containers\DeliveryAudit\Adapter\DeliveryAdapter\DeliveryAdapter;
 use App\Containers\DeliveryAudit\Contracts\Service\AssignDelayReportServiceInterface;
 use App\Containers\DeliveryAudit\Contracts\Service\DeliveryAuditRequestServiceInterface;
+use App\Containers\DeliveryAudit\Contracts\Service\VendorDelayReportsServiceInterface;
+use App\Containers\DeliveryAudit\DataTransfers\AuditReportsData;
 use App\Containers\DeliveryAudit\Http\Requests\Api\V1\AssignReportRequest;
+use App\Containers\DeliveryAudit\Http\Requests\Api\V1\AuditReportsRequest;
 use App\Containers\DeliveryAudit\Http\Requests\Api\V1\DeliveryAuditRequest;
 use App\Containers\DeliveryAudit\Models\DelayReport;
 use App\Ship\Http\Controllers\Controller;
@@ -38,6 +41,13 @@ class DeliveryAuditController extends Controller
     {
         // IMPROVE: better to use Resource
         $serviceResponse = $service->execute($request->getData());
+
+        return apiResponse(true, $serviceResponse);
+    }
+
+    public function reports(AuditReportsRequest $request, VendorDelayReportsServiceInterface $service)
+    {
+        $serviceResponse = $service->reports($request->getData());
 
         return apiResponse(true, $serviceResponse);
     }

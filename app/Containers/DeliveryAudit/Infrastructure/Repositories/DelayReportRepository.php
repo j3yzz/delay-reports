@@ -80,4 +80,26 @@ class DelayReportRepository implements DelayReportRepositoryInterface
             ->leftJoin('drivers', 'drivers.id', '=', 'trips.driver_id')
             ->first();
     }
+
+    public function getVendorDelayReportsLastWeek(int $vendorId)
+    {
+        return DelayReport::query()
+            ->select([
+                'delay_reports.id',
+                'delay_reports.approach_type',
+                'delay_reports.agent_id',
+                'delay_reports.agent_description',
+                'vendors.name as vendor_name',
+                'orders.ordered_at',
+            ])
+            ->join('orders', 'orders.id', '=', 'delay_reports.order_id')
+            ->join('vendors', 'vendors.id', '=', 'orders.vendor_id')
+            ->where([
+                'vendors.id' => $vendorId,
+                ['delay_reports.created_at', '>', now()->startOfDay()->subWeek()],
+                ['delay_reports.created_at', '<', now()->endOfDay()],
+            ])
+            ->orderBy('delay_reports.id', 'DESC')
+            ->get();
+    }
 }

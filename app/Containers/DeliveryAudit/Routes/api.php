@@ -25,6 +25,9 @@ Route::group([
     Route::get('/delivery/audit/assign-report', [DeliveryAuditController::class, 'assignReport'])
         ->name('delivery.audit.assign-report');
 
+    Route::get('delivery/audit/reports/{vendorId}', [DeliveryAuditController::class, 'reports'])
+        ->name('delivery.audit.reports');
+
     Route::group(['middleware'    => ['auth:sanctum']], function() {
         Route::post('delivery/audit/{orderId}', [DeliveryAuditController::class, 'auditRequest'])
             ->name('delivery.audit');

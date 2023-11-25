@@ -17,4 +17,6 @@ interface DelayReportRepositoryInterface
     public function assignAgent(int $delayReportId, int $agentId);
 
     public function getDelayReportDetails(int $delayReportId);
+
+    public function getVendorDelayReportsLastWeek(int $vendorId);
 }
