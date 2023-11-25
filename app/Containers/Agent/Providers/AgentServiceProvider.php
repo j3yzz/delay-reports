@@ -29,7 +29,7 @@ class AgentServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-
+        $this->app->register(RepositoryServiceProvider::class);
     }
 
     /**
