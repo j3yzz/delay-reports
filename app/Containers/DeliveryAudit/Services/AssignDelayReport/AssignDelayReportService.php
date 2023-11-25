@@ -2,11 +2,14 @@
 
 namespace App\Containers\DeliveryAudit\Services\AssignDelayReport;
 
+use App\Containers\Agent\Models\Agent;
+use App\Containers\DeliveryAudit\Adapter\AgentAdapter\AgentAdapter;
 use App\Containers\DeliveryAudit\Contracts\Repositories\DelayReportRepositoryInterface;
 use App\Containers\DeliveryAudit\Contracts\Service\AssignDelayReportServiceInterface;
 use App\Containers\DeliveryAudit\DataTransfers\AssignReportData;
 use App\Containers\DeliveryAudit\Services\AssignDelayReport\Tasks\AssignDelayReportToAgentTask;
 use App\Containers\DeliveryAudit\Services\AssignDelayReport\Tasks\GetFirstDelayReportTask;
+use App\Ship\Exceptions\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 
 class AssignDelayReportService implements AssignDelayReportServiceInterface
@@ -21,7 +24,10 @@ class AssignDelayReportService implements AssignDelayReportServiceInterface
 
     public function execute(AssignReportData $data)
     {
-        /// check agent is existing?
+        $agent = (new AgentAdapter())->findAgentById($data->agentId);
+        if (!$agent) {
+            throw (new ModelNotFoundException())->setModel(Agent::class);
+        }
 
         $delayReport = app(GetFirstDelayReportTask::class)->run();
 
