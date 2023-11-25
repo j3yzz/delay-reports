@@ -92,9 +92,9 @@ class Order
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return string
      */
-    public function getOrderedAt(): \DateTimeImmutable
+    public function getOrderedAt(): string
     {
         return $this->orderedAt;
     }

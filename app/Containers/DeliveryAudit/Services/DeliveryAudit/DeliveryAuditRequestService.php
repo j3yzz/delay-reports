@@ -11,6 +11,7 @@ use App\Containers\DeliveryAudit\Models\DelayReport;
 use App\Containers\DeliveryAudit\Services\DeliveryAudit\AuditStrategy\Approaches\DeliveryEstimateApproach;
 use App\Containers\DeliveryAudit\Services\DeliveryAudit\AuditStrategy\Approaches\DeliveryTrackApproach;
 use App\Containers\DeliveryAudit\Services\DeliveryAudit\AuditStrategy\AuditContext;
+use App\Containers\DeliveryAudit\Services\DeliveryAudit\Tasks\IsDeliveryTimePassTask;
 use App\Ship\Exceptions\ModelNotFoundException;
 
 class DeliveryAuditRequestService implements DeliveryAuditRequestServiceInterface
@@ -41,6 +42,8 @@ class DeliveryAuditRequestService implements DeliveryAuditRequestServiceInterfac
             $order->delivery_time,
             $order->status
         );
+
+        (new IsDeliveryTimePassTask())->run($orderEntity->getOrderedAt(), $orderEntity->getDeliveryTime());
 
         $tripStatus = $this->deliveryAdapter->firstStatusTripOrderByOrderId($orderEntity->getId());
 
