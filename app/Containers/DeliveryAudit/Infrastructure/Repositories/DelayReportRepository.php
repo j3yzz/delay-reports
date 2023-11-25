@@ -32,4 +32,52 @@ class DelayReportRepository implements DelayReportRepositoryInterface
                 ['status', '!=', DelayReport::STATUS_FINISHED],
             ])->first();
     }
+
+    public function findPendingDelayReportWithNullAgent(int $delayReportId): ?DelayReport
+    {
+        return DelayReport::query()->where([
+            'id' => $delayReportId,
+            'agent_id' => null,
+            'status' => DelayReport::STATUS_PENDING,
+        ])->first();
+    }
+
+    public function assignAgent(int $delayReportId, int $agentId)
+    {
+        return DelayReport::query()
+            ->where([
+                'id' => $delayReportId,
+            ])
+            ->update([
+                'agent_id' => $agentId,
+                'status' => DelayReport::STATUS_IN_PROGRESS,
+            ]);
+    }
+
+    public function getDelayReportDetails(int $delayReportId)
+    {
+        return DelayReport::query()
+            ->select([
+                "delay_reports.id     as delay_report_id",
+                "delay_reports.status as delay_report_status",
+                "delay_reports.agent_description",
+                "users.id             as user_id",
+                "users.name           as user_name",
+                "users.phone_number   as user_phone_number",
+                "vendors.id           as vendor_id",
+                "vendors.phone_number as vendor_phone_number",
+                "trips.status         as trip_status",
+                "trips.driver_id      as trip_driver_id",
+                "drivers.phone_number as driver_phone_number",
+            ])
+            ->where([
+                'delay_reports.id' => $delayReportId,
+            ])
+            ->join('orders', 'orders.id', '=', 'delay_reports.order_id')
+            ->join('users', 'users.id', '=', 'orders.user_id')
+            ->join('vendors', 'vendors.id', '=', 'orders.vendor_id')
+            ->leftJoin('trips', 'trips.order_id', '=', 'orders.id')
+            ->leftJoin('drivers', 'drivers.id', '=', 'trips.driver_id')
+            ->first();
+    }
 }

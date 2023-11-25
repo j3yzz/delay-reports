@@ -35,4 +35,9 @@ class RedisAdapter
     {
         return Redis::connection()->lpop($listName);
     }
+
+    public function srem(string $setName, $member)
+    {
+        return Redis::connection()->srem($setName, $member);
+    }
 }

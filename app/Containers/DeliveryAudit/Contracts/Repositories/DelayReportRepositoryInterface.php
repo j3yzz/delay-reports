@@ -11,4 +11,10 @@ interface DelayReportRepositoryInterface
     public function unfinishedDelayReportByOrderId(int $orderId): ?DelayReport;
 
     public function firstUnfinishedQueueDelayReport(int $orderId): ?DelayReport;
+
+    public function findPendingDelayReportWithNullAgent(int $delayReportId): ?DelayReport;
+
+    public function assignAgent(int $delayReportId, int $agentId);
+
+    public function getDelayReportDetails(int $delayReportId);
 }
