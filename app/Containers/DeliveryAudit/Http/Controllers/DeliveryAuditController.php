@@ -7,6 +7,7 @@ use App\Containers\Delivery\Facades\Delivery;
 use App\Containers\Delivery\Models\Order;
 use App\Containers\DeliveryAudit\Adapter\DeliveryAdapter\DeliveryAdapter;
 use App\Containers\DeliveryAudit\Contracts\Service\DeliveryAuditRequestServiceInterface;
+use App\Containers\DeliveryAudit\Http\Requests\Api\V1\AssignReportRequest;
 use App\Containers\DeliveryAudit\Http\Requests\Api\V1\DeliveryAuditRequest;
 use App\Containers\DeliveryAudit\Models\DelayReport;
 use App\Ship\Http\Controllers\Controller;
@@ -30,5 +31,10 @@ class DeliveryAuditController extends Controller
         }
 
         return apiResponse(true, $response);
+    }
+
+    public function assignReport(AssignReportRequest $request)
+    {
+
     }
 }
