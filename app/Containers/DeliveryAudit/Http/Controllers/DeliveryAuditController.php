@@ -8,6 +8,7 @@ use App\Containers\Delivery\Models\Order;
 use App\Containers\DeliveryAudit\Adapter\DeliveryAdapter\DeliveryAdapter;
 use App\Containers\DeliveryAudit\Contracts\Service\DeliveryAuditRequestServiceInterface;
 use App\Containers\DeliveryAudit\Http\Requests\Api\V1\DeliveryAuditRequest;
+use App\Containers\DeliveryAudit\Models\DelayReport;
 use App\Ship\Http\Controllers\Controller;
 
 class DeliveryAuditController extends Controller
@@ -15,7 +16,19 @@ class DeliveryAuditController extends Controller
     public function auditRequest(int $orderId, DeliveryAuditRequest $request,  DeliveryAuditRequestServiceInterface $service)
     {
         $serviceResponse = $service->audit($request->getData());
+        $auditApproach = $service->getAuditApproach();
 
-        return apiResponse(true, ['order' => $orderId]);
+        if ($auditApproach == DelayReport::APPROACH_ADD_TO_QUEUE) {
+            $response = [
+                'approach_type' => $auditApproach
+            ];
+        } else {
+            $response = [
+                'new_estimation_time' => $serviceResponse,
+                'approach_type' => $auditApproach
+            ];
+        }
+
+        return apiResponse(true, $response);
     }
 }
