@@ -2,6 +2,8 @@
 
 namespace App\Ship\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -26,5 +28,22 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return apiResponse(false, ['Unauthenticated'], 401);
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof ModelNotFoundException) {
+            $model = explode('\\', $e->getModel());
+            $name = lcfirst(end($model));
+            return apiResponse(false, ["$name.not_found"]);
+
+        }
+
+        return parent::render($request, $e);
     }
 }

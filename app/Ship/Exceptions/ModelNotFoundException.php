@@ -2,7 +2,9 @@
 
 namespace App\Ship\Exceptions;
 
-class ModelNotFoundException extends \Exception
+use Illuminate\Database\Eloquent\ModelNotFoundException as BaseModelNotFoundExceptionAlias;
+
+class ModelNotFoundException extends BaseModelNotFoundExceptionAlias
 {
     protected $model;
     /**
@@ -18,11 +20,4 @@ class ModelNotFoundException extends \Exception
         return apiResponse(false, ["$name.not_found"]);
 
     }
-
-    public function setModel($model)
-    {
-        $this->model = $model;
-        return $this;
-    }
-
 }
