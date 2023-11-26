@@ -27,3 +27,7 @@ dev:
 	make app-install
 	make app-setup
 	make app-migrate
+
+.PHONY: test
+test:
+	$(sail) php artisan test app/
