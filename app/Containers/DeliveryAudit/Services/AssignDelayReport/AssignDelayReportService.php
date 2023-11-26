@@ -47,6 +47,6 @@ class AssignDelayReportService implements AssignDelayReportServiceInterface
             return $exception;
         }
 
-        return $this->delayReportRepository->getDelayReportDetails(21);
+        return $this->delayReportRepository->getDelayReportDetails($delayReport->id);
     }
 }
