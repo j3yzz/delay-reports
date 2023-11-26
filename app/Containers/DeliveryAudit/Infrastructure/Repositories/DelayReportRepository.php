@@ -102,4 +102,12 @@ class DelayReportRepository implements DelayReportRepositoryInterface
             ->orderBy('delay_reports.id', 'DESC')
             ->get();
     }
+
+    public function hasPendingDelayReportForAgent(int $agentId): bool
+    {
+        return DelayReport::query()
+            ->where('agent_id', $agentId)
+            ->where('status', DelayReport::STATUS_PENDING)
+            ->exists();
+    }
 }
